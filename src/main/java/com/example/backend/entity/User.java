@@ -137,6 +137,6 @@ public class User {
     public String toString() {
         return "ID:"+id+"\n"+name+"\n"+"Age:"+age+"\n"+gender+"\n"+"Height (cm):"+height+"\n"+
          race+"\n"+religion+"\n"+interests.toString()+"\n"+instagram+"\n"+spotify+"\n"+leetcode+"\n"
-         +picture+"\n"+description;
+         +picture+"\n"+description+"\n";
     }
 }
