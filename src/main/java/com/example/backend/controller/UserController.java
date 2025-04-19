@@ -18,18 +18,14 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public List<User> createUser(@RequestBody User user) {
-        List<User> matches = userService.saveUserAndGenerateMatches(user); // entry point
-        return matches;
-    }
-    @PostMapping("/test")
-    public String helloWorld(@RequestParam String name) {
-        System.out.println("Hello"+name);
-        return "Hello"+name;
-    }
-    @PostMapping("/matches")
-    public void getMatches(@RequestParam String id) {
-        List<User> matches = userService.saveUserAndGenerateMatches(userRepository.getUserById(Long.valueOf(id)));
+    public List<User> getMatches(@RequestBody User user) {
+        List<User> matches = userService.saveUserAndGenerateMatches(user);
         System.out.println(matches.toString());
-    }
+        return matches;
+    }/*
+    @PostMapping
+    public List<User> getMatchesById(@RequestParam String id) {
+        List<User> matches = userService.saveUserAndGenerateMatches(userRepository.getUserById(Long.valueOf(id)));
+        return matches;
+    }*/
 }
