@@ -24,6 +24,7 @@ public class User {
     private String spotify;
     private String leetcode;
     private String picture;
+	private String description;
 
     @ElementCollection
     private List<String> categories;
