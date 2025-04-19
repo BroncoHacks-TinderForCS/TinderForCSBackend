@@ -35,7 +35,6 @@ public class MatchService {
     public List<User> generateMatches(User user) {
         List<User> users = userRepository.findAll();
         users.remove(user);
-        System.out.println("All users:\n"+users.toString());
         final String PROMPT = "Given the following user profile:" +
                         user.toString() +
                         "return the profile ID that best matches it out of the following profiles:"+
