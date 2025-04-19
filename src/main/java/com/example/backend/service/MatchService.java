@@ -42,16 +42,23 @@ public class MatchService {
         List<User> suitorsToRemove = new ArrayList<>();
         suitors.remove(user);
         if (isSafeUser(user)) {
+            String desires = desires(user);
+            System.out.println(desires);
             for (User suitor : suitors) {
                 if (suitor.getId().equals(user.getId()))
                     suitorsToRemove.add(suitor);
-                else {
-                    if (!isSafeUser(suitor))
-                        suitorsToRemove.add(suitor);
-                }
+                else if (!suitor.getGender().toLowerCase().equals(desires.toLowerCase()))
+                    suitorsToRemove.add(suitor);
             }
             for (User suitor : suitorsToRemove)
                 suitors.remove(suitor);
+            Random rng = new Random();
+            while (suitors.size()>10)
+                suitors.remove(rng.nextInt(suitors.size()));
+            for (User suitor : suitors) {
+                if (!isSafeUser(suitor))
+                        suitorsToRemove.add(suitor);
+            }
             System.out.println(suitors.toString());
             
             
@@ -95,17 +102,22 @@ public class MatchService {
                     List<ChatMessage> messages = new ArrayList<>();
                     messages.add(new ChatMessage("user",MATCH_PROMPT));
                     ChatRequest request = ChatRequest.builder().model("gemini-2.0-flash").contents(messages).build();
-                    ChatResponse response = client.chat(request);
-                    System.out.println(response.toString());
-                    String[] lines = response.toString().split("\n");
-                    long matchID = Long.parseLong(extractNumber(lines[lines.length-2]+","+lines[lines.length-1])); // skip response metadata
-                    User match = userRepository.getUserById(matchID);
-                    if (match == null)
-                        throw new NullPointerException("Id="+matchID+" not in database!");
-                    matches.add(match);
-                    
-                    while (suitors.contains(match))
-                        suitors.remove(match);
+                    try {
+                        ChatResponse response = client.chat(request);
+                        System.out.println(response.toString());
+                        String[] lines = response.toString().split("\n");
+                        long matchID = Long.parseLong(extractNumber(lines[lines.length-2]+","+lines[lines.length-1])); // compensate for weird endline formatting with metadata
+                        User match = userRepository.getUserById(matchID);
+                        if (match != null)
+                            matches.add(match);
+
+                        while (suitors.contains(match))
+                            suitors.remove(match);
+                    }
+                    catch (Exception e) {
+                        System.out.println(e);
+                        break;
+                    }
                 }
             }
         }
@@ -136,5 +148,18 @@ public class MatchService {
         ChatResponse response = client.chat(request);
         System.out.println(user.getId()+":" +response.toString());
         return !response.toString().contains("BAD");
+    }
+    private String desires(User user) {
+        GeminiClient client = new GeminiClient(GEMINI_API_KEY);
+        List<ChatMessage> messages = new ArrayList<>();
+        messages.add(new ChatMessage("user", user.toString()+"\nWho is this user sexually attacted to? If ambiguous, assume heterosexuality. Output only 'Male' or 'Female'"));
+        ChatRequest request = ChatRequest.builder().model("gemini-2.0-flash").contents(messages).build();
+        ChatResponse response = client.chat(request);
+        
+        if (response.toString().toLowerCase().contains("female"))
+            return "Female";
+        else
+            return "Male";
+        
     }
 }
