@@ -18,6 +18,7 @@ public class UserService {
 
     public List<User> saveUserAndGenerateMatches(User user) {
         userRepository.save(user);
-        return matchService.generateMatches(user);
+        List<User> matches = matchService.generateMatches(user);
+        return matches;
     }
 }
