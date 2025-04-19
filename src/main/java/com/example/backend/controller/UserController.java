@@ -20,4 +20,9 @@ public class UserController {
         List<User> matches = userService.saveUserAndGenerateMatches(user); // entry point
         return matches;
     }
+    @PostMapping("/test")
+    public String helloWorld(@RequestParam String name) {
+        System.out.println("Hello"+name);
+        return "Hello"+name;
+    }
 }
