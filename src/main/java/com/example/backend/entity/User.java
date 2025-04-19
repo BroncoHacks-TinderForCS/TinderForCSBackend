@@ -17,10 +17,8 @@ public class User {
     private String race;
     private String religion;
     private String gradeLevel;
-
     @ElementCollection
     private List<String> interests;
-
     private String instagram;
     private String spotify;
     private String leetcode;
@@ -30,6 +28,7 @@ public class User {
 
     @ElementCollection
     private List<String> categories;
+    private String status;
 
     // Getters and Setters
 
@@ -145,9 +144,12 @@ public class User {
     public void setGradeLevel(String g) {
         gradeLevel=g;
     }
+    public void setStatus(String s) {
+        status=s;
+    }
     public String toString() {
         return "ID:"+id+"\n"+name+"\n"+"Age:"+age+"\n"+gender+"\n"+"Height (cm):"+height+"\n"+
          race+"\n"+religion+"\n"+interests.toString()+"\n"+instagram+"\n"+spotify+"\n"+leetcode+"\n"
-         +picture+"\n"+description+"\n"+college+"\n"+gradeLevel+"\n";
+         +picture+"\n"+description+"\n"+college+"\n"+gradeLevel+"\n"+status+"\n";
     }
 }
