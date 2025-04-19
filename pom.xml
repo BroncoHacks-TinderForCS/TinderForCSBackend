@@ -55,6 +55,12 @@
 		  <artifactId>openai-java</artifactId>
 		  <version>1.4.1</version>
 		</dependency>
+	 <dependency>
+	  <groupId>com.openai</groupId>
+	  <artifactId>openai-java-client-okhttp</artifactId>
+	  <version>1.4.1</version>
+	  <type>jar</type>
+	 </dependency>
 	</dependencies>
 
 	<build>

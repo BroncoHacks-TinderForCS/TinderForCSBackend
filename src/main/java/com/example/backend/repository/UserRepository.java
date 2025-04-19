@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, String> {
 
     // Custom query to find a user by email
-
+    User getUserByID(String ID);
+    @Override
+    String toString();
 }

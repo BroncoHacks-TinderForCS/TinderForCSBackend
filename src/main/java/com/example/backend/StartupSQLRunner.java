@@ -17,6 +17,7 @@ public class StartupSQLRunner {
     @EventListener(ApplicationReadyEvent.class)
     public void runSQLQueries() {
         // Insert 5 users
+        /*
         jdbcTemplate.execute(
                 "INSERT INTO users (id, name, email) VALUES ('1', 'John Doe', 'john.doe@example.com')");
         jdbcTemplate.execute(
@@ -26,7 +27,7 @@ public class StartupSQLRunner {
         jdbcTemplate.execute(
                 "INSERT INTO users (id, name, email) VALUES ('4', 'Emily Davis', 'emily.davis@example.com')");
         jdbcTemplate.execute(
-                "INSERT INTO users (id, name, email) VALUES ('5', 'Michael Johnson', 'michael.johnson@example.com')");
+                "INSERT INTO users (id, name, email) VALUES ('5', 'Michael Johnson', 'michael.johnson@example.com')");*/
 
     }
 

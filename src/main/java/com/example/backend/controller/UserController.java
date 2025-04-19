@@ -11,7 +11,7 @@ import com.example.backend.entity.User;
 import com.example.backend.service.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/users") // code listens here
 public class UserController {
 
     @Autowired
@@ -19,7 +19,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody User user) {
-        List<User> matches = userService.saveUserAndGenerateMatches(user);
+        List<User> matches = userService.saveUserAndGenerateMatches(user); // entry point
         return ResponseEntity.ok(Map.of(
                 "message", "User saved and matches generated successfully",
                 "matches", matches));
