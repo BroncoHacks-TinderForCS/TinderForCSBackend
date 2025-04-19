@@ -16,7 +16,30 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
-
+    /*
+{
+"id": 1,
+"name": "Daniel Miller",
+"age": 25,
+"gender": "Male",
+"description": "Hackathons has been my main interest, but recently I've started enjoying Cybersecurity too.",
+"height": 170,
+"race": null,
+"religion": "Muslim",
+"instagram": "https://instagram.com/daniel89",
+"spotify": null,
+"leetcode": "Contest rating=303",
+"picture": "https://randomuser.me/api/portraits/men/44.jpg",
+"interests": [
+"Embedded Systems",
+"Hardware"
+],
+"categories": [
+"Dating",
+"Friends"
+]
+}
+    */
     @PostMapping
     public List<User> getMatches(@RequestBody User user) {
         List<User> matches = userService.saveUserAndGenerateMatches(user);
