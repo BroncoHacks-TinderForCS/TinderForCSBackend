@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.backend.entity.User;
+import com.example.backend.repository.UserRepository;
 import com.example.backend.service.UserService;
 
 @RestController
 @RequestMapping("/users") // code listens here
 public class UserController {
-
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private UserService userService;
 
@@ -24,5 +26,11 @@ public class UserController {
     public String helloWorld(@RequestParam String name) {
         System.out.println("Hello"+name);
         return "Hello"+name;
+    }
+    @PostMapping("/matches")
+    public void getMatches(@RequestParam String id) {
+        List<User> matches = userService.saveUserAndGenerateMatches(userRepository.getUserById(Long.valueOf(id)));
+        for (User user : matches)
+            System.out.println(user);
     }
 }
