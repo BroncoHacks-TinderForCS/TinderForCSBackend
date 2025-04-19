@@ -30,7 +30,6 @@ public class UserController {
     @PostMapping("/matches")
     public void getMatches(@RequestParam String id) {
         List<User> matches = userService.saveUserAndGenerateMatches(userRepository.getUserById(Long.valueOf(id)));
-        for (User user : matches)
-            System.out.println(user);
+        System.out.println(matches.toString());
     }
 }
