@@ -16,6 +16,7 @@ public class User {
     private Integer height;
     private String race;
     private String religion;
+    private String gradeLevel;
 
     @ElementCollection
     private List<String> interests;
@@ -141,9 +142,12 @@ public class User {
     public void setCollege(String c) {
         college=c;
     }
+    public void setGradeLevel(String g) {
+        gradeLevel=g;
+    }
     public String toString() {
         return "ID:"+id+"\n"+name+"\n"+"Age:"+age+"\n"+gender+"\n"+"Height (cm):"+height+"\n"+
          race+"\n"+religion+"\n"+interests.toString()+"\n"+instagram+"\n"+spotify+"\n"+leetcode+"\n"
-         +picture+"\n"+description+"\n"+college+"\n";
+         +picture+"\n"+description+"\n"+college+"\n"+gradeLevel+"\n";
     }
 }
