@@ -25,6 +25,7 @@ public class User {
     private String leetcode;
     private String picture;
 	private String description;
+    private String college;
 
     @ElementCollection
     private List<String> categories;
@@ -134,9 +135,15 @@ public class User {
     public void setCategories(List<String> categories) {
         this.categories = categories;
     }
+    public void setDescription(String d) {
+        description=d;
+    }
+    public void setCollege(String c) {
+        college=c;
+    }
     public String toString() {
         return "ID:"+id+"\n"+name+"\n"+"Age:"+age+"\n"+gender+"\n"+"Height (cm):"+height+"\n"+
          race+"\n"+religion+"\n"+interests.toString()+"\n"+instagram+"\n"+spotify+"\n"+leetcode+"\n"
-         +picture+"\n"+description+"\n";
+         +picture+"\n"+description+"\n"+college+"\n";
     }
 }
